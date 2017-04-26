@@ -1,1 +1,1 @@
-# hexo-generate-buildpack
+# angular-compile-buildpack
