@@ -14,13 +14,13 @@ fi
 cd "$BUILD_DIR"
 
 if [ "$BUILD_ENV" = "production" ]; then
-  echo "Running staging build script"
+  echo "Running production build script"
   yarn build-production
   exit
 fi
 
 if [ "$BUILD_ENV" = "staging" ]; then
-  echo "Running production build script"
+  echo "Running staging build script"
   yarn build-staging
   exit
 fi
