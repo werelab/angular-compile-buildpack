@@ -2,6 +2,28 @@
 
 BUILD_DIR=$1
 
+env_dir=$3
+whitelist_regex='^(BUILD_ENV)$'
+if [ -d "$env_dir" ]; then
+  for e in $(ls $env_dir); do
+    echo "$e" | grep -E "$whitelist_regex" && export "$e=$(cat $env_dir/$e)"
+    :
+  done
+fi
+
 cd "$BUILD_DIR"
 
+if [ "$BUILD_ENV" = "production" ]; then
+  echo "Running staging build script"
+  yarn build-production
+  exit
+fi
+
+if [ "$BUILD_ENV" = "staging" ]; then
+  echo "Running production build script"
+  yarn build-staging
+  exit
+fi
+
+echo "Running default build script"
 yarn build
